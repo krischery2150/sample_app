@@ -15,7 +15,7 @@ module SessionsHelper
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
-    # Returns the user corresponding to the remember token cookie.
+  # Returns the user corresponding to the remember token cookie.
   def current_user
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
@@ -33,6 +33,7 @@ module SessionsHelper
   end
   
   def log_out
+    forget(current_user)
     session.delete(:user_id)
     @current_user = nil
   end
